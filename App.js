@@ -9,14 +9,6 @@ function App() {
 
   const [permission, setPermission] = useState(false)
 
-  function PrivateRoute({children, path}) {
-    return (
-      <Route path={path} render={({location}) => {
-        return permission === true ?
-        children:<Redirect to={{pathname:'/login', state:{currentLocation:location}}} />}}/>
-    )
-  }
-
   return (
 
     <div>
@@ -36,13 +28,22 @@ function App() {
       <Route path="/login">
         <Login permission={permission} setPermission={setPermission} />
       </Route>
-      <PrivateRoute path="/secretpage">
+      <PrivateRoute path="/secretpage" permission={permission}>
         <SecretPage />
       </PrivateRoute>
 
     </div>
   );
 };
+
+function PrivateRoute({children, path, permission}) {
+  return (
+    <Route path={path} render={({location}) => {
+      return permission === true ?
+      children:
+      <Redirect to={{pathname:'/login', state:{currentLocation:location}}} />}}/>
+  )
+}
 
 function LogOutButton({permission, setPermission}) {
 
@@ -59,6 +60,5 @@ function LogOutButton({permission, setPermission}) {
     return null
   }
 }
-
 
 export default App;
