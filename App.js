@@ -38,10 +38,10 @@ function App() {
 
 function PrivateRoute({children, path, permission}) {
   return (
-    <Route path={path} render={({location}) => {
+    <Route path={path} render={() => {
       return permission === true ?
       children:
-      <Redirect to={{pathname:'/login', state:{currentLocation:location}}} />}}/>
+      <Redirect to={{pathname:'/login', state:{currentLocation:path}}} />}}/>
   )
 }
 
