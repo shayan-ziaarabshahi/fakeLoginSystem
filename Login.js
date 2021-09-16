@@ -4,20 +4,13 @@ import { Redirect, useLocation } from 'react-router-dom'
 function Login({permission, setPermission}) {
 
   let location = useLocation().state
-  let currentLocation;
-
-  if (location) {
-    currentLocation = location.currentLocation
-  } else {
-    currentLocation = '/'
-  }
 
   const handleClick = () => {
     setPermission(true)
   }
 
   if (permission) {
-    return <Redirect to={currentLocation} />
+    return <Redirect to={location ?. currentLocation || '/'} />
   }
   else {
     return (
