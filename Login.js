@@ -1,4 +1,3 @@
-import React, { } from 'react'
 import { Redirect, useLocation } from 'react-router-dom'
 
 
@@ -8,7 +7,7 @@ function Login({permission, setPermission}) {
   let currentLocation;
 
   if (location) {
-    currentLocation = location.currentLocation.pathname
+    currentLocation = location.currentLocation
   } else {
     currentLocation = '/'
   }
